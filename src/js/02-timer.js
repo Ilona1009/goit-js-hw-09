@@ -1,6 +1,9 @@
 
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
+import Notiflix from 'notiflix';
+
+
 
 const refs = {
     myInput: document.getElementById("datetime-picker"),
@@ -21,11 +24,11 @@ const options = {
     onClose(selectedDates) {
         DATE = selectedDates[0];
         if (DATE < Date.now()) {
-            window.alert("Please choose a date in the future");
+            Notiflix.Notify.warning("Please choose a date in the future");
             refs.startbBtn.setAttribute('disabled', '');
         }
         else {
-            window.alert.success('Click on Start!!!');
+            Notiflix.Notify.success('Click on Start!!!');
             refs.startbBtn.removeAttribute('disabled');
         }
     },
@@ -34,22 +37,30 @@ const options = {
 flatpickr(refs.myInput, options);
 
 class Timer {
-    constructor() {
-    
+    constructor({onTick}) {
+        this.isActive = false;
+        this.intervalId = null;
+        this.onTick = onTick;
     }
 
     start() {
-        const startTime = DATE;
+        if (this.isActive) {
+            return
+        }
 
-        setInterval(() => {
+        const finishTime = DATE;
+
+        this.isActive = true;
+        this.intervalId = setInterval(() => {
             const dataNow = Date.now();
-            const deltaTime = startTime - dataNow;
-            console.log(convertMs(deltaTime))
-            
+            const deltaTime = finishTime - dataNow;    
+            const time = this.convertMs(deltaTime);
+            this.onTick(time);
+
         }, 1000);
     }
 
-        padStart(value){
+        addLeadingZero(value){
             return String(value).padStart(2, '0');
     }
 
@@ -59,10 +70,10 @@ class Timer {
             const hour = minute * 60;
             const day = hour * 24;
 
-            const days = padStart(Math.floor(ms / day));
-            const hours = padStart(Math.floor((ms % day) / hour));
-            const minutes = padStart(Math.floor(((ms % day) % hour) / minute));
-            const seconds = padStart(Math.floor((((ms % day) % hour) % minute) / second));
+            const days = this.addLeadingZero(Math.floor(ms / day));
+            const hours = this.addLeadingZero(Math.floor((ms % day) / hour));
+            const minutes = this.addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+            const seconds = this.addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
             return { days, hours, minutes, seconds };
     }
@@ -75,7 +86,14 @@ class Timer {
             refs.minutes.textContent = minutes;  
             refs.seconds.textContent = seconds;
 
-        }
+}
+        
+const time = new Timer({
+    onTick: updateClockFace
+})
+
+refs.startbBtn.addEventListener('click', time.start.bind(time))
+
 
 
 
