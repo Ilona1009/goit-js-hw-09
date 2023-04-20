@@ -16,3 +16,68 @@ img {
   display: block;
   max-width: 100%;
 }
+
+
+.timer_body {
+  background-color: #121212;
+}
+
+.timer {
+  font-family:  sans-serif;
+  font-weight: 100;
+  color: #66ff99;
+  font-size: 56px;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+.field {
+padding: 10px;
+display: flex;
+flex-direction: column;
+border-width: 2px ;
+border-radius:  3px ;
+border-color: #66ff99;
+ border-style: solid;
+
+}
+
+.label{
+font-family: serif;
+font-size: 26px;
+}
+
+.value{
+  padding: 20px;
+}
+
+.start{
+  display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.start>input{
+  text-align: center;
+  font-size: 26px;
+}
+
+.button{
+  padding: 10px 50px;
+display: flex;
+flex-direction: column;
+border-width: 2px ;
+border-radius:  3px ;
+border-color: #66ff99;
+ border-style: solid;
+ font-family: serif;
+font-size: 26px;
+color: #66ff99;
+background: #121212;
+}
+
