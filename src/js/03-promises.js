@@ -33,6 +33,8 @@ function handleSubmit(e) {
           Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         });
     }
+
+    form.reset();
   }
 
     function createPromise(position, delay) {
