@@ -22,7 +22,9 @@ function handleSubmit(e) {
         })
         .catch(({ position, delay }) => {
           Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-        });
+        })
+          .finally(form.reset());
+
     }
     else {
       createPromise(position, delayValue + stepValue * (position - 1))
@@ -31,10 +33,11 @@ function handleSubmit(e) {
         })
         .catch(({ position, delay }) => {
           Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
-        });
+        })
+          .finally(form.reset());
+
     }
 
-    form.reset();
   }
 
     function createPromise(position, delay) {
