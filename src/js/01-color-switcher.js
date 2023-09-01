@@ -3,13 +3,13 @@ const stopRef = document.querySelector('button[data-stop]');
 const bodyRef = document.querySelector('body');
 
 let timeId = null;
-startRef.addEventListener('click', clickbtn);
+startRef.addEventListener('click', clickOnBtn);
 stopRef.addEventListener('click', stopSwitch);
 
 
 
 
-function clickbtn() {
+function clickOnBtn() {
     timeId = setInterval(() => { return bodyRef.style.backgroundColor = getRandomHexColor() }, 1000);
     startRef.setAttribute('disabled', '');
 
