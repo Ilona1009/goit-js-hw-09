@@ -7,9 +7,7 @@ form.addEventListener('submit', handleSubmit);
 function handleSubmit(e) {
   e.preventDefault();
   
-  const {
-    elements: { delay, step, amount }
-  } = e.currentTarget;
+  const { delay, step, amount } = e.currentTarget.elements;
   const delayValue = Number(delay.value);
   const stepValue = Number(step.value);
   const amountValue = Number(amount.value);
@@ -32,7 +30,7 @@ function handleSubmit(e) {
           Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         })
         .catch(({ position, delay }) => {
-          Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+          Notiflix.Notify.failure(`❌ gi${position} in ${delay}ms`);
         })
           .finally(form.reset());
 

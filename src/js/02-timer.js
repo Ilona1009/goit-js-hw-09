@@ -23,7 +23,7 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
         DATE = selectedDates[0];
-        if (DATE < Date.now()) {
+        if (DATE < Date.now() ) {
             Notiflix.Notify.warning("Please choose a date in the future");
             refs.startbBtn.setAttribute('disabled', '');
         }
@@ -52,6 +52,12 @@ class Timer {
 
         this.isActive = true;
         this.intervalId = setInterval(() => {
+            if (finishTime <= Date.now()) {
+                clearInterval(this.intervalId);
+                Notiflix.Notify.info('Game over');
+                return
+            }
+
             const dataNow = Date.now();
             const deltaTime = finishTime - dataNow;    
             const time = this.convertMs(deltaTime);
