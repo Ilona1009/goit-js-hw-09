@@ -12,7 +12,7 @@ function handleSubmit(e) {
   const stepValue = Number(step.value);
   const amountValue = Number(amount.value);
 
-  for (position = 1; position <= amountValue; position += 1) {
+  for (let position = 1; position <= amountValue; position += 1) {
     if (position === 1) {
       createPromise(position, delayValue )
         .then(({ position, delay }) => {
